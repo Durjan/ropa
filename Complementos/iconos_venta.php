@@ -14,7 +14,7 @@
 						<div class="ch-item ch-img-1">
 							<div class="ch-info">
 								<h3>Realizar venta </h3>
-								<p>Original Shop <a href="registro_productos.php">Ingresa</a></p>
+								<p>Original Shop <a href="factura.php">Ingresa</a></p>
 							</div>
 						</div>
 					</li>
