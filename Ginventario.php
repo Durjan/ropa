@@ -15,21 +15,23 @@
 	<section>
 		<div id="directorio"> 
 			<br>
-			<label><a href="empleados.php">Empleados\</a></label>
+			<label><a href="empleados.php">Inventario\</a></label>
 			<hr>
 		</div>
 		<br><br>
 		<div class="panel panel-default" style="width: 80%; margin: auto;">
-  		<div class="panel-heading">Empleados</div>
+  		<div class="panel-heading">Administrar Inventario</div>
   		<div class="panel-body">
-    		<button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Agregar</button>
-    		<br><br>
+        <a href="ingreso_inventario.php" class="btn btn-success glyphicon glyphicon-plus">Agregar Producto a Inventario</a>
+    		<button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Generar Reporte</button>
+        
+        <br><br>
     		<div id="table"></div>
     		<table class="table table-hover">
       		<tr>
         		<td>Id</td>
         		<td><strong>Nombre</strong></td>
-        		<td><strong>Tipo</strong></td>
+        		<td><strong>Descripción</strong></td>
         		<td><strong>Accion</strong></td>
       		</tr>
       		<?php 
@@ -80,47 +82,6 @@
 
 </body>
 </html>
-
-<div class="modal fade" tabindex="-1" role="dialog" id="Mymodal" aria-labelledby="gridSystemModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">Registro empleados</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-4">.col-md-4</div>
-          <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
-          <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-9">
-            Level 1: .col-sm-9
-            <div class="row">
-              <div class="col-xs-8 col-sm-6">
-                Level 2: .col-xs-8 .col-sm-6
-              </div>
-              <div class="col-xs-4 col-sm-6">
-                Level 2: .col-xs-4 .col-sm-6
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 
 <div class="modal fade" tabindex="-1" role="dialog" id="Mymodal1" aria-labelledby="gridSystemModalLabel">

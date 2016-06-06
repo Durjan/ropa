@@ -10,7 +10,6 @@
 	<script src="jquery-ui/jquery-ui.js"></script> 
   	<script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
   	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  	<script type="text/javascript" src="html2canvas.js"></script>
 </head>
 <body>
 	<?php include("Complementos/menu-cabezado.php");?>
