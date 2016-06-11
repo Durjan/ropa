@@ -21,7 +21,7 @@ include("../conexion.php");
 												"CODIGO":"'.$datos["id_producto"].'",
 												"DESCRIPCION":"'.$datos["descripcion"].'",
 												"CANTIDAD":"'.$datos["cantidad"].'",
-												"PRECIO DE COMPRA":"'.$datos["precioCompra"].'",
+												"PRECIO":"'.$datos["precioCompra"].'",
 												
 												
 												"ACCIONES":"<div class=\'btn-group\'><button type=\'button\' class=\'btn btn-2 waves-effect waves-teal  dropdown-toggle\' data-toggle=\'dropdown\' aria-haspopup=\'true\' aria-expanded=\'false\'>Acción</button>

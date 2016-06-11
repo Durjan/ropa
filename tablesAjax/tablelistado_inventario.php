@@ -6,6 +6,9 @@ include("../conex.php");
 
 		
 					try{
+						//fijarse bien en a consultaa, se recomienda primero porbar la consulta en phpmyadmn pra ver si
+						// todo esta bien, y segun creo no exite la tabla inventario, revisar bien la base de datos
+						//y las consultas que se hacen
 						$sql = "select inventario.id_producto,inventario.stock,inventario.precio_venta,productos.id_producto,productos.codigo,productos.descripcion,productos.presentacion,productos.marca from productos,inventario where inventario.id_producto=productos.id_producto";
 						$resultado = $conn->prepare($sql);
 						$resultado->execute();
