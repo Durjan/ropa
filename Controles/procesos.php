@@ -54,12 +54,37 @@ class process{
 
 	}
 
+	function guardar_producto($nom,$desc,$cantidad,$preC,$precioV,$fechaI,$sucu,$provee,$tip)
+	{
+		
+		$existencia=mysql_query("SELECT nombre FROM producto WHERE nombre='$nom'");
+		$exis=mysql_num_rows($existencia);
+		if($exis==0)
+		{
+
+		$sql = mysql_query("INSERT INTO producto (id_producto,nombre,descripcion,cantidad,precioCompra,precioVenta,fechaIngreso,id_sucursal,id_proveedor,id_tipoArticulo) VALUES ('','$nom','$desc','$cantidad','$preC','$precioV','$fechaI','$sucu','$provee','$tip')");
+		if($sql){
+
+			return True;
+		}else{
+
+			return False;
+		}
+		}else
+		{
+			return False;
+		}
+		//close conexion 
+		mysqli_close($link);
+		die();
+	}
 
 }
 
 $llamar = new process;
 
-switch ($op) {
+switch ($op) 
+{
     case 'login':
     	$user=$_POST['user'];
 		$clave=$_POST['pass'];
@@ -70,7 +95,23 @@ switch ($op) {
 		}
 		break;
 
-	
- 
+	case 'ingresar_producto':
+		$nom = $_POST['nombre'];
+		$desc=$_POST['descripcion'];
+		$cantidad=$_POST['cantidad'];
+		$preC=$_POST['precioC'];
+		$precioV=$_POST['precioV'];
+		$fechaI=$_POST['fecha1'];
+		$sucu=$_POST['sucursal'];
+		$provee=$_POST['proveedor'];
+		$tip=$_POST['T_arti'];
+		if($llamar -> guardar_producto($nom,$desc,$cantidad,$preC,$precioV,$fechaI,$sucu,$provee,$tip))
+		{
+			echo "exito";
+		}else
+		{
+			echo "error";
+		}
+		break;
 }
 ?>

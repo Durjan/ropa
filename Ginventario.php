@@ -8,7 +8,8 @@
 	<link rel="StyleSheet" href="Bootstrap/css/bootstrap-theme.min.css" type="text/css"></link>
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script src="jquery-ui/jquery-ui.js"></script> 
-  	<script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/listado_inventario.js"></script>
 </head>
 <body>
 	<?php include("Complementos/menu-cabezado.php");?>
@@ -23,52 +24,33 @@
   		<div class="panel-heading">Administrar Inventario</div>
   		<div class="panel-body">
         <a href="ingreso_inventario.php" class="btn btn-success glyphicon glyphicon-plus">Agregar Producto a Inventario</a>
-    		<button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Generar Reporte</button>
-        
+    		<a href="reporte_inventario.php"><button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Generar Reporte</button></a>
         <br><br>
-    		<div id="table"></div>
-    		<table class="table table-hover">
-      		<tr>
-        		<td>Id</td>
-        		<td><strong>Nombre</strong></td>
-        		<td><strong>Descripción</strong></td>
-        		<td><strong>Accion</strong></td>
-      		</tr>
-      		<?php 
-          if(isset($consul)){
-      		while($datos= mysql_fetch_array($consul)){
-      		}
-          ?>
-      		<tr>
-        		<td><?php echo $datos[0] ?></td>
-        		<td><?php echo $datos[1] ?></td>
-        		<td><?php echo $datos[3] ?></td>
-        		<td>
-          		<div class="btn-group">
-            		<button type="button" class="btn btn-success glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span>
-            		</button>
-            		<ul class="dropdown-menu">
-              		<li><a href="#" class="glyphicon glyphicon-remove" onclick="javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('eliminar_user.php?id=<?php echo $datos[0] ?>')}"> Eliminar</a></li>
-              		<li><a href="" data-toggle="modal"  data-target="#Mymodal1" class="glyphicon glyphicon-pencil"> Modificar</a></li>
-            		</ul>
-          		</div>
-
-        		</td>
-      		</tr>
-      		<?php }?>
-      		<tr>
-      			<td>1</td>
-        		<td>Alfaro</td>
-        		<td>Administrador</td>
-        		<td><div class="btn-group">
-            		<button type="button" class="btn btn-success glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span>
-            		</button>
-            		<ul class="dropdown-menu">
-              		<li><a href="#" class="glyphicon glyphicon-remove" onclick="javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('eliminar_user.php?id=<?php echo $datos[0] ?>')}"> Eliminar</a></li>
-              		<li><a href="" data-toggle="modal"  data-target="#Mymodal1" class="glyphicon glyphicon-pencil"> Modificar</a></li>
-            		</ul>
-          		</div></td></tr>
-    		</table>
+    		<div id="tabla"></div>
+    		<br><br><table style="overflow-y: hidden;margin-top: 100px;z-index: 0;" id="table" class="table table-striped table-hover" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+            <th>CODIGO</th>                     
+            <th >DESCRIPCIÓN</th>
+            <th >MARCA</th>
+            <th>PRESENTACIÓN</th>
+            <th>STOCK</th>
+            <th>PRECIO</th>
+            <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+            <th>CODIGO</th>                     
+            <th >DESCRIPCIÓN</th>
+            <th >MARCA</th>
+            <th>PRESENTACIÓN</th>
+            <th>STOCK</th>
+            <th>PRECIO</th>
+            <th>ACCIONES</th>
+                </tr>
+            </tfoot>
+        </table>
   		</div>
 		</div>
 		
@@ -89,16 +71,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">Modificacion empleados</h4>
+        <h4 class="modal-title" id="gridSystemModalLabel">Datos de productos en inventario</h4>
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-4">.col-md-4</div>
-          <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+          <div class="col-md-4">producto</div>
+          <div class="col-md-4 col-md-offset-4">camisas</div>
         </div>
         <div class="row">
-          <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
-          <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
+          <div class="col-md-3 col-md-offset-3">cantidad</div>
+          <div class="col-md-2 col-md-offset-4">20</div>
         </div>
         <div class="row">
           <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>

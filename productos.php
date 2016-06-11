@@ -1,18 +1,29 @@
-<?php include("Complementos/validador.php");?>
+<?php include("Complementos/validador.php");
+include("Complementos/conexion.php");
+?>
 <html lang="es">
 <head>
 	<meta charset="UTF-8" >
 	<title>ORIGINAL SHOP | MENU </title>
-	<link rel="StyleSheet" href="css/style_menu.css" type="text/css"></link>	
+  <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/dataTables.min.js"></script>
+  <script src="js/modulo_producto.js"></script>
+	<script src="js/sucursal.js"></script>
+  
+  <link rel="StyleSheet" href="css/style_menu.css" type="text/css"></link>	
 	<link rel="StyleSheet" href="Bootstrap/css/bootstrap.css" type="text/css"></link>
 	<link rel="StyleSheet" href="Bootstrap/css/bootstrap-theme.min.css" type="text/css"></link>
-	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-	<script src="jquery-ui/jquery-ui.js"></script> 
-  	<script type="text/javascript" src="Bootstrap/js/bootstrap.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/dataTables.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+  
 </head>
 <body>
 	<?php include("Complementos/menu-cabezado.php");?>
-	<section>
+	<section id="cuerpo">
 		<div id="directorio"> 
 			<br>
 			<label><a href="empleados.php">Productos\</a></label>
@@ -21,54 +32,33 @@
 		<br><br>
 		<div class="panel panel-default" style="width: 80%; margin: auto;">
   		<div class="panel-heading">Administrar Productos</div>
-  		<div class="panel-body">
-    		<button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Agregar Producto</button>
-    		<button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Generar Reporte</button>
-        
+  		<div class="panel-body" >
+    		<a onclick='agregarSucursal()'><button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Agregar Producto</button></a>
+        <a href="reporte_productos.php" type="button" class="btn btn-success glyphicon glyphicon-book">Generar Reporte</a>
         <br><br>
-    		<div id="table"></div>
-    		<table class="table table-hover">
-      		<tr>
-        		<td>Id</td>
-        		<td><strong>Nombre</strong></td>
-        		<td><strong>Descripción</strong></td>
-        		<td><strong>Accion</strong></td>
-      		</tr>
-      		<?php 
-          if(isset($consul)){
-      		while($datos= mysql_fetch_array($consul)){
-      		}
-          ?>
-      		<tr>
-        		<td><?php echo $datos[0] ?></td>
-        		<td><?php echo $datos[1] ?></td>
-        		<td><?php echo $datos[3] ?></td>
-        		<td>
-          		<div class="btn-group">
-            		<button type="button" class="btn btn-success glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span>
-            		</button>
-            		<ul class="dropdown-menu">
-              		<li><a href="#" class="glyphicon glyphicon-remove" onclick="javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('eliminar_user.php?id=<?php echo $datos[0] ?>')}"> Eliminar</a></li>
-              		<li><a href="" data-toggle="modal"  data-target="#Mymodal1" class="glyphicon glyphicon-pencil"> Modificar</a></li>
-            		</ul>
-          		</div>
-
-        		</td>
-      		</tr>
-      		<?php }?>
-      		<tr>
-      			<td>1</td>
-        		<td>Alfaro</td>
-        		<td>Administrador</td>
-        		<td><div class="btn-group">
-            		<button type="button" class="btn btn-success glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span>
-            		</button>
-            		<ul class="dropdown-menu">
-              		<li><a href="#" class="glyphicon glyphicon-remove" onclick="javascript:if(window.confirm('¿Confirma que desea eliminar el registro')){location.replace('eliminar_user.php?id=<?php echo $datos[0] ?>')}"> Eliminar</a></li>
-              		<li><a href="" data-toggle="modal"  data-target="#Mymodal1" class="glyphicon glyphicon-pencil"> Modificar</a></li>
-            		</ul>
-          		</div></td></tr>
-    		</table>
+    		<div id="contenido"></div>
+    		<br><br>
+        <table style="overflow-y: hidden;margin-top: 100px;z-index: 0;" id="table" class="table table-striped table-hover" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                      
+            <th>CODIGO</th>                     
+            <th>DESCRIPCIÓN</th>
+            <th>CANTIDAD</th>
+            <th>PRECIO DE COMPRA</th>
+            <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+            <th>CODIGO</th>                     
+            <th>DESCRIPCIÓN</th>
+            <th>CANTIDAD</th>
+            <th>PRECIO DE COMPRA</th>
+            <th>ACCIONES</th>
+                </tr>
+            </tfoot>
+        </table>
   		</div>
 		</div>
 		
@@ -94,29 +84,35 @@
       <div id="contenedor">
         <fieldset>
         <legend>Datos del producto</legend>  
-        <form class="form-horizontal" id="ingreso_producto">
+        <form class="form-horizontal" id="form_ingreso_producto">
             <div class="form-group">
               <label  class="col-sm-4 control-label">Nombre</label>
               <div class="col-sm-5" >
-                <input type="text" class="form-control" id="inputEmail3" placeholder="Nombre de producto">
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de producto">
               </div>
               <br>
               <br>
-              <label  class="col-sm-4 control-label">Precio de compra</label>
+              <label  class="col-sm-4 control-label">Descripción</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control"  placeholder="Precio de compra">
+                <input type="text" class="form-control"  id="descripcion" name="descripcion" placeholder="Descripción">
               </div>
               <br>
               <br>
               <label  class="col-sm-4 control-label">Cantidad </label>
               <div class="col-sm-4">
-                <input type="text" class="form-control"  placeholder="Cantidad">
+                <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
               </div>
               <br>
               <br>
-              <label  class="col-sm-4 control-label">Precio de venta </label>
+              <label  class="col-sm-4 control-label">Precio de Compra</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control"  placeholder="Precio de venta">
+                <input type="text" class="form-control" id="precioC" name="precioC" placeholder="Precio de venta">
+              </div>
+              <br>
+              <br>
+              <label  class="col-sm-4 control-label">Precio de Venta</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="precioV" name="precioV" placeholder="Precio de venta">
               </div>
               <br>
               <br>
@@ -127,35 +123,59 @@
               </div>
               <br>
               <br>
+              <label  class="col-sm-4 control-label">Sucursal</label>
+              <div class="col-sm-5">
+                   <?php
+                    $consulta_categoria=mysql_query("SELECT *FROM sucursal");
+                    echo " <select  id=\"sucursal\" name=\"sucursal\" class=\"form-control col-sm-30\" >";
+                    echo "<option value=''>Seleccione..</option>";
+                    while($fila=mysql_fetch_array($consulta_categoria))
+                    {
+                    echo "<option value='".$fila['id_sucursal']."'>".$fila['nombre']."</option>";
+                    }
+                    echo "  </select>";
+                  ?>
+              </div>
+              <br>
+              <br>
               <label  class="col-sm-4 control-label">Proveedor</label>
               <div class="col-sm-5">
-                  <input type="text" class="form-control"  placeholder="Ingrese el proveedor">
+                   <?php
+                    $consulta_categoria=mysql_query("SELECT *FROM proveedor");
+                    echo " <select  id=\"proveedor\" name=\"proveedor\" class=\"form-control col-sm-30\" >";
+                    echo "<option value=''>Seleccione..</option>";
+                    while($fila=mysql_fetch_array($consulta_categoria)){
+                    echo "<option value='".$fila['id_proveedor']."'>".$fila['nombre']."</option>";
+                    }
+                    echo "  </select>";
+                    ?>
               </div>
               <br>
               <br>
-              <label  class="col-sm-4 control-label">Tipo</label>
+              <label  class="col-sm-4 control-label">Tipo tipo de Articulo</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control"  placeholder="Ingrese el tipo">
+                    <?php
+                    $consulta_categoria=mysql_query("SELECT *FROM tipoArticulo");
+                    echo " <select  id=\"T_arti\" name=\"T_arti\" class=\"form-control col-sm-30\" >";
+                    echo "<option value=''>Seleccione..</option>";
+                    while($fila=mysql_fetch_array($consulta_categoria)){
+                    echo "<option value='".$fila['id_tipoArticulo']."'>".$fila['nombre']."</option>";
+                    }
+                    echo "  </select>";
+                    ?>
               </div>
               <br>
               <br>
-              <label  class="col-sm-4 control-label">Descripción</label>
-              <div class="col-sm-5">
-                <textarea class="form-control" rows="3" placeholder="Descripción de producto"></textarea>
-              </div>
-              <div class="col-sm-7">
-                <br>
-                <br>
-                <button type="button" class="btn btn-success col-sm-7 glyphicon glyphicon-plus">Guardar</button>
-              </div>
             </div>
+            <input id="op" name="op" type="hidden" value="ingresar_producto"> 
             </form>
             </fieldset>
+
           </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <a onclick="guardarProducto();"><button type="button" class="btn btn-primary glyphicon glyphicon-plus">Save</button></a>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -167,7 +187,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">Modificacion empleados</h4>
+        <h4 class="modal-title" id="gridSystemModalLabel">Datos del producto</h4>
       </div>
       <div class="modal-body">
         <div class="row">
