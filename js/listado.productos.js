@@ -19,15 +19,13 @@ $(document).ready(function(){
 			});
 
 			$('#table').DataTable( {
-		        "ajax": "tablesAjax/tablelistado_inventario.php", //cambiuando el nombre del archivo referencia, tenia punto
-		        													//pero el archivo referencia lleva guion bajo
+		        "ajax": "tablesAjax/tablelistado.productos.php",
 		        "columns": [
 		          
 		            { "data": "CODIGO" },
 		            { "data": "DESCRIPCION" },
-		            { "data": "MARCA" },
-		            { "data": "PRESENTACION" },
-		             { "data": "STOCK" },
+		            { "data": "CANTIDAD" },
+		           
 		              { "data": "PRECIO" },
 		            { "data": "ACCIONES" }
 		        ]

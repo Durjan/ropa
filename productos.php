@@ -11,6 +11,8 @@ include("Complementos/conexion.php");
   <script type="text/javascript" src="js/materialize.min.js"></script>
   <script type="text/javascript" src="js/dataTables.min.js"></script>
   <script src="js/modulo_producto.js"></script>
+    <script src="js/listado.productos.js"></script><!-- AGREGANDO EL JS PARA EL LISTADO DE PRODUTOS-->
+
 	<script src="js/sucursal.js"></script>
   
   <link rel="StyleSheet" href="css/style_menu.css" type="text/css"></link>	
@@ -36,9 +38,25 @@ include("Complementos/conexion.php");
     		<a onclick='agregarSucursal()'><button type="button" data-toggle="modal"  data-target="#Mymodal" class="btn btn-success glyphicon glyphicon-plus">Agregar Producto</button></a>
         <a href="reporte_productos.php" type="button" class="btn btn-success glyphicon glyphicon-book">Generar Reporte</a>
         <br><br>
-    		<div id="contenido"></div>
-    		<br><br>
-        <table style="overflow-y: hidden;margin-top: 100px;z-index: 0;" id="table" class="table table-striped table-hover" cellspacing="0" width="100%">
+    		<div id="contenido" style="  ">
+        <style>
+          #table_wrapper .row .col-sm-12{
+
+            margin-top:-85%;
+          }
+          #table_wrapper .row .col-sm-5{
+
+            margin-top:-65%;
+          }
+          #table_wrapper .row .col-sm-7{
+
+            margin-top:-65%;
+            float: right;
+          }
+        </style>
+        <table id="table" style="overflow-y: hidden ;z-index: 0; float: left;"  class="table table-striped table-hover" cellspacing="0" width="100%">
+            <!-- agregando el ID a la tabla este se llama desde el js refcien agregado arrriba -->
+
             <thead>
                 <tr>
                       
@@ -58,7 +76,10 @@ include("Complementos/conexion.php");
             <th>ACCIONES</th>
                 </tr>
             </tfoot>
-        </table>
+        </table>  
+        </div>
+    		<br><br>
+        
   		</div>
 		</div>
 		
